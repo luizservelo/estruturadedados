@@ -88,6 +88,7 @@ void faz_merge(fila *f1, fila *f2, fila *merge){
 	temp1 = remove(f1);
 	temp2 = remove(f2);
 	
+	//Coloca o primeiro nas temps e já remove da fila
 	while(vazia(f1) == 0 && vazia(f2) == 0){
 		
 		if(temp1<=temp2){
@@ -100,28 +101,51 @@ void faz_merge(fila *f1, fila *f2, fila *merge){
 		}
 	}
 	
+	// Insere no merge os dois ultimos removidos pelo while
 	if(temp1 <= temp2){
 		inserir(temp1,merge);
-		inserir(temp2,merge);
+		temp1=0;
 		
 	}
 	else{
 		inserir(temp2,merge);
-		inserir(temp1,merge);
+		temp2=0;
 		
 	}
 	
+	//insere o restante da fila se uma for maior que a outra
+	
 	while(vazia(f1) == 0){
 		
-		inserir(remove(f1), merge);
-		
+		if(temp2 > f1->primeiro){		
+			inserir(remove(f1), merge );
+		}
+		else {
+			inserir(temp2, merge);
+			temp2=0;  // Zera caso o ultimo elemento2 entre na condicao de ser menor que um elemento 1
+			printf("AddResto");
+		}		
 	}
 	
 	while(vazia(f2) == 0){
 		
-		inserir(remove(f2), merge);
-		
+		if(temp1 > f2->primeiro){		
+			inserir(remove(f2), merge );
+		}
+		else{
+		 	inserir(temp1, merge);
+		 	temp1=0;  // Zera caso o ultimo elemento1 entre na condicao de ser menor que um elemento 2
+			printf("AddResto");
+		}	
 	}
+	
+	// Caso o ultimo elemento 1 ou 2 for maior que o outro e nao entrar na condicao acima, ele garante que o ultimo seja colocado na ulotima posicao
+	
+	if (temp1 != 0)
+		inserir(temp1,merge);
+		
+	if (temp2 != 0)
+		inserir(temp2,merge);	
 	
 }
 
