@@ -1,6 +1,15 @@
-#include "funcoes.cpp"
+#include <stdio.h>
+#include <stdlib.h>
 
-struct Fila;
+typedef struct Fila {
+	
+	int tamanho;
+	int *dado;
+	int primeiro;
+	int ultimo;
+	int itens;
+	
+}fila;
 
 void criafila (fila *f, int tam);
 
